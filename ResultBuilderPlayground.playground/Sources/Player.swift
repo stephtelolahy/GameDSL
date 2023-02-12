@@ -6,7 +6,7 @@ public struct Player {
 }
 
 public extension Player {
-    init(_ id: String, @AttributeBuilder _ content: () -> [Attribute]) {
+    init(_ id: String, @AttributeBuilder _ content: () -> [Attribute] = { [] }) {
         self.init(id: id, attr: content())
     }
 }
