@@ -1,19 +1,20 @@
 import Foundation
 
 let beer = Card("beer") {
-    Value("6♥️")
-    OnPlay {
-        Heal(1)
+    Heal(1)
+}
+
+let stagecoach = Card("stagecoach") {
+    for _ in (0..<2) {
+        Draw()
     }
 }
 
 let dynamite = Card("dynamite") {
-    OnPlay {
-        Luck("♥️") {
-            Heal(1)
-        } onFailure: {
-            Damage(3)
-        }
+    Luck("♥️") {
+        Heal(1)
+    } onFailure: {
+        Damage(3)
     }
 }
 
