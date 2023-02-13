@@ -1,7 +1,23 @@
 import Foundation
 
+let beer = Card("beer") {
+    Value("6♥️")
+    OnPlay {
+        Heal(1)
+    }
+}
 
-var ctx = Game {
+let dynamite = Card("dynamite") {
+    OnPlay {
+        Luck("♥️") {
+            Heal(1)
+        } onFailure: {
+            Damage(3)
+        }
+    }
+}
+
+let ctx = Game {
     Players {
         "suzzyLafayette"
         "vultureSam"
@@ -15,9 +31,8 @@ var ctx = Game {
     }
     Turn("elGringo")
     Deck {
-        Card("beer") {
-            Value("6♥️")
-        }
+        beer
+        dynamite
     }
 }
 
