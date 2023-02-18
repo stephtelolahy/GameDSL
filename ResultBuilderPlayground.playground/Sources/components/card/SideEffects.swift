@@ -1,6 +1,6 @@
 import Foundation
 
-public struct OnPlay: Attribute {
+public struct SideEffects: Attribute {
     public let elementName: String = "onPlay"
     let effects: [Effect]
 

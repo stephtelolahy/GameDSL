@@ -1,20 +1,26 @@
 import Foundation
 
 let beer = Card("beer") {
-    Heal(1)
-}
-
-let stagecoach = Card("stagecoach") {
-    for _ in (0..<2) {
-        Draw()
+    SideEffects {
+        Heal(1)
     }
 }
 
+let stagecoach = Card("stagecoach") {
+    SideEffects {
+        Draw()
+        Draw()
+    }
+
+}
+
 let dynamite = Card("dynamite") {
-    Luck("♥️") {
-        Heal(1)
-    } onFailure: {
-        Damage(3)
+    SideEffects {
+        Luck("♥️") {
+            Heal(1)
+        } onFailure: {
+            Damage(3)
+        }
     }
 }
 
@@ -33,6 +39,7 @@ let ctx = Game {
     Turn("elGringo")
     Deck {
         beer
+        stagecoach
         dynamite
     }
 }
