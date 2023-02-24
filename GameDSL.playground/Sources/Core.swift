@@ -5,7 +5,6 @@ import Foundation
 public protocol Game {
     var attr: [Attribute] { get }
     var players: [Player] { get }
-    var locations: [CardLocation] { get }
     var event: Result<Event, Error>? { get set }
 }
 
@@ -24,14 +23,12 @@ public protocol Event {
 public protocol Player {
     var id: String { get }
     var attr: [Attribute] { get }
-    var locations: [CardLocation] { get }
 }
 
 /// Card Location in the game
-public protocol CardLocation {
-    var id: String { get }
+public protocol CardLocation: Attribute {
     var cards: [Card] { get }
-    var visibility: [String] { get }
+//    var visibility: [String] { get }
 }
 
 /// Cards that are used in a game.
@@ -53,7 +50,7 @@ public protocol CardAction {
 
 /// Define the constraints to play a card
 public protocol Requirement {
-    func match(_ ctx: Game) -> Result<Void, Error>
+//    func match(_ ctx: Game) -> Result<Void, Error>
 }
 
 /// Card side effects

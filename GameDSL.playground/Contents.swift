@@ -1,20 +1,22 @@
 import Foundation
 
-let beer = RealCard("beer", actions:  {
-    RealCardAction(playable: true) {
+let beer = CardImpl("beer", actions:  {
+    CardActionImpl(playable: true) {
         Heal(1)
+    } requirements: {
+        PlayerAtLeast(3)
     }
 })
 
-let stagecoach = RealCard("stagecoach", actions: {
-    RealCardAction(playable: true) {
+let stagecoach = CardImpl("stagecoach", actions: {
+    CardActionImpl(playable: true) {
         Draw()
         Draw()
     }
 })
 
-let dynamite = RealCard("dynamite", actions: {
-    RealCardAction(playable: false) {
+let dynamite = CardImpl("dynamite", actions: {
+    CardActionImpl(playable: false) {
         Luck("♥️") {
             Heal(1)
         } onFailure: {
@@ -23,7 +25,7 @@ let dynamite = RealCard("dynamite", actions: {
     }
 })
 
-let elGringo = RealPlayer("elGringo") {
+let elGringo = PlayerImpl("elGringo") {
     Health(2)
     Hand {
         "gatling"
@@ -31,12 +33,11 @@ let elGringo = RealPlayer("elGringo") {
     }
 }
 
-let ctx = RealGame {
-    Players {
-        "suzzyLafayette"
-        "vultureSam"
-        elGringo
-    }
+let ctx = GameImpl {
+    "suzzyLafayette"
+    "vultureSam"
+    elGringo
+} attr: {
     Turn("elGringo")
     Deck {
         beer

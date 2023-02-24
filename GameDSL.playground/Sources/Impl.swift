@@ -1,6 +1,6 @@
 import Foundation
 
-public struct RealCard: Card {
+public struct CardImpl: Card {
     public let id: String
     public let attributes: [Attribute]
     public let actions: [CardAction]
@@ -16,42 +16,48 @@ public struct RealCard: Card {
     }
 }
 
-public struct RealCardAction: CardAction {
+public struct CardActionImpl: CardAction {
     public let playable: Bool
     public let requirements: [Requirement]
     public let effects: [Effect]
     public let cost: Int
 
-    public init(playable: Bool, @EffectBuilder _ content: () -> [Effect]) {
+    public init(
+        playable: Bool,
+        @EffectBuilder effects: () -> [Effect],
+    @RequirementBuilder requirements: () -> [Requirement] = { [] }) {
         self.playable = playable
-        self.effects = content()
-        self.requirements = []
+        self.effects = effects()
+        self.requirements = requirements()
         self.cost = 0
     }
 }
 
 
-public struct RealGame: Game {
+public struct GameImpl: Game {
     public let attr: [Attribute]
     public let players: [Player]
     public let locations: [CardLocation]
     public var event: Result<Event, Error>?
 
-    public init(@AttributeBuilder _ content: () -> [Attribute]) {
-        self.attr = content()
-        self.players = []
+    public init(
+        @PlayerBuilder players: () -> [Player],
+        @AttributeBuilder attr: () -> [Attribute]
+    ) {
+        self.players = players()
+        self.attr = attr()
         self.locations = []
     }
 }
 
-public struct RealPlayer: Player {
+public struct PlayerImpl: Player {
     public let id: String
     public let attr: [Attribute]
     public let locations: [CardLocation]
 
-    public init(_ id: String, @AttributeBuilder _ content: () -> [Attribute] = { [] }) {
+    public init(_ id: String, @AttributeBuilder _ attr: () -> [Attribute] = { [] }) {
         self.id = id
-        self.attr = content()
+        self.attr = attr()
         self.locations = []
     }
 }

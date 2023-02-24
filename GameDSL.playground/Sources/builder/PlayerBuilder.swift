@@ -12,6 +12,6 @@ public struct PlayerBuilder {
     }
     
     public static func buildExpression(_ id: String) -> Player {
-        RealPlayer(id)
+        PlayerImpl(id)
     }
 }
