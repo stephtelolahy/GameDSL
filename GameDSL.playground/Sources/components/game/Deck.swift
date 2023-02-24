@@ -1,5 +1,6 @@
 import Foundation
 
+// TODO: change to card location
 public struct Deck: Attribute {
     public let id: String = "deck"
     let cards: [Card]
