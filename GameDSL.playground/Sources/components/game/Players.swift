@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Players: Attribute {
-    public let elementName: String = "players"
+    public let id: String = "players"
     let players: [Player]
 
     public init(@PlayerBuilder _ content: () -> [Player]) {

@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Turn: Attribute {
-    public let elementName: String = "turn"
+    public let id: String = "turn"
     let value: String
 
     public init(_ value: String) {

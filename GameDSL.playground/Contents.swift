@@ -1,20 +1,19 @@
 import Foundation
 
-let beer = Card("beer") {
+let beer = RealCard("beer") {
     SideEffects {
         Heal(1)
     }
 }
 
-let stagecoach = Card("stagecoach") {
+let stagecoach = RealCard("stagecoach") {
     SideEffects {
         Draw()
         Draw()
     }
-
 }
 
-let dynamite = Card("dynamite") {
+let dynamite = RealCard("dynamite") {
     SideEffects {
         Luck("♥️") {
             Heal(1)
@@ -24,17 +23,19 @@ let dynamite = Card("dynamite") {
     }
 }
 
-let ctx = Game {
+let elGringo = RealPlayer("elGringo") {
+    Health(2)
+    Hand {
+        "gatling"
+        "missed"
+    }
+}
+
+let ctx = RealGame {
     Players {
         "suzzyLafayette"
         "vultureSam"
-        Player("elGringo") {
-            Health(2)
-            Hand {
-                "gatling"
-                "missed"
-            }
-        }
+        elGringo
     }
     Turn("elGringo")
     Deck {

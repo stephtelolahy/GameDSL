@@ -12,6 +12,6 @@ public struct CardBuilder {
     }
     
     public static func buildExpression(_ id: String) -> Card {
-        Card(id)
+        RealCard(id)
     }
 }
