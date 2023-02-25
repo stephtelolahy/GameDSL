@@ -4,15 +4,17 @@ import Foundation
 public struct Luck: CardAction {
     public var type: CardActionType = .active
     public var requirements: [Requirement] = []
-    public var ctx: [String: Attribute]
+    public var ctx: [String: Attribute] = [:]
+    let regex: String
+    let onSuccess: CardAction
+    let onFailure: CardAction?
 
     public init(_ regex: String,
                 @CardActionBuilder _ onSuccess: () -> CardAction,
                 @CardActionBuilder onFailure: () -> CardAction? = { nil }) {
-        self.ctx = [:]
-//        self.regex = regex
-//        self.onSuccess = onSuccess()
-//        self.onFailure = onFailure()
+        self.regex = regex
+        self.onSuccess = onSuccess()
+        self.onFailure = onFailure()
     }
 
     public func resolve(_ ctx: Game) -> Result<EventOutput, Error> {

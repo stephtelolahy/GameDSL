@@ -51,7 +51,7 @@ public protocol Game {
 public protocol Attribute {
 
     /// attribute name
-    var id: String { get }
+    var name: String { get }
 }
 
 /// Player who is participating in a game

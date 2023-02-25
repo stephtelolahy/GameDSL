@@ -40,11 +40,11 @@ public struct CardImpl: Card {
     }
 }
 
-private extension Array where Element == Attribute {
+extension Array where Element == Attribute {
 
     func toDictionary() -> [String: Attribute] {
         reduce(into: [String: Attribute]()) {
-            $0[$1.id] = $1
+            $0[$1.name] = $1
         }
     }
 }

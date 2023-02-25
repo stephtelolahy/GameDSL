@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Deck: CardLocationAttribute {
-    public let id: String = "deck"
+    public let name: String = "deck"
     public let cards: [Card]
     public var visibility: [String]?
 
