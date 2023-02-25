@@ -41,16 +41,16 @@ public struct CardImpl: Card {
 }
 
 public struct CardActionImpl: CardAction {
-    public let playable: Bool
+    public let type: CardActionType
     public let effects: [Effect]
     public let requirements: [Requirement]
 
     public init(
-        playable: Bool,
+        type: CardActionType,
         @EffectBuilder effects: () -> [Effect],
         @RequirementBuilder requirements: () -> [Requirement] = { [] }
     ) {
-        self.playable = playable
+        self.type = type
         self.effects = effects()
         self.requirements = requirements()
     }

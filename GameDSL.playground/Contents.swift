@@ -26,11 +26,11 @@ import Foundation
             OnStartTurn()
     }
  }
- 
+
  */
 
 let beer = CardImpl("beer", actions:  {
-    CardActionImpl(playable: true) {
+    CardActionImpl(type: .active) {
         Heal(1)
     } requirements: {
         PlayerAtLeast(3)
@@ -38,13 +38,13 @@ let beer = CardImpl("beer", actions:  {
 })
 
 let stagecoach = CardImpl("stagecoach", actions: {
-    CardActionImpl(playable: true) {
+    CardActionImpl(type: .active) {
         Draw()
     }
 })
 
 let dynamite = CardImpl("dynamite", actions: {
-    CardActionImpl(playable: false) {
+    CardActionImpl(type: .triggerred) {
         Luck("♥️") {
             Heal(1)
         } onFailure: {

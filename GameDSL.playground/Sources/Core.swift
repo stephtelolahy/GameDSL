@@ -92,9 +92,7 @@ public protocol Card {
 public protocol CardAction {
 
     /// The manner an action is dispatched
-    /// if  `true`, the card becomes active when requirments is met, then player can play it
-    /// If `false,` then card action is triggered automatically, the side effects are applyed
-    var playable: Bool { get }
+    var type: CardActionType { get }
 
     /// side effects on playing this card
     var effects: [Effect] { get }
@@ -107,6 +105,15 @@ public protocol CardAction {
 
     /// required target to play this card
 //    var target: Any? { get }
+}
+
+public enum CardActionType {
+
+    /// card becomes active when requirments are met, then player can choose to play it
+    case active
+
+    /// the side effects are applyed automatically when requirements are met
+    case triggerred
 }
 
 /// Function  defining constraints to play a card
