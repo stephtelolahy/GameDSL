@@ -1,14 +1,27 @@
 import Foundation
 
+
 @resultBuilder
-public struct CardActionBuilder {
+public struct CardActionsBuilder {
 
     public static func buildBlock(_ components: CardAction...) -> [CardAction] {
         components
-    }    
+    }
 }
 
-public extension CardActionImpl {
+@resultBuilder
+public struct CardActionBuilder {
+
+    public static func buildBlock(_ component: CardAction) -> CardAction {
+        component
+    }
+
+    static func buildArray(_ components: [CardAction]) -> CardAction {
+        fatalError()
+    }
+}
+
+public extension CardAction {
 
     func active(@RequirementBuilder requirements: () -> [Requirement] = { [] }) -> Self {
         var copy = self

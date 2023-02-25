@@ -89,22 +89,23 @@ public protocol Card {
     var attr: [String: Attribute] { get }
 }
 
-public protocol CardAction {
-
-    /// action's side effect
-    var effect: Effect { get }
+/// Function defining card side effects
+public protocol CardAction: Event {
 
     /// The manner an action is dispatched
-    var type: CardActionType { get }
+    var type: CardActionType { get set }
 
     /// requirements for playing this card
-    var requirements: [Requirement] { get }
+    var requirements: [Requirement] { get set }
 
     /// cost on playing this card
 //    var cost: Any? { get }
 
     /// required target to play this card
 //    var target: Any? { get }
+
+    /// Resolving context
+    var ctx: [String: Attribute] { get set }
 }
 
 public enum CardActionType {
@@ -119,11 +120,4 @@ public enum CardActionType {
 /// Function  defining constraints to play a card
 public protocol Requirement {
     func match(_ ctx: Game) -> Result<Void, Error>
-}
-
-/// Function defining card side effects
-public protocol Effect: Event {
-
-    /// All attributes
-    var attr: [String: Attribute] { get set }
 }

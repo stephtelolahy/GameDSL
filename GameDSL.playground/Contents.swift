@@ -1,57 +1,24 @@
 import Foundation
 
-/*
-
- let beer = Card("beer") {
+let beer = CardImpl("beer") {
     Heal(1)
-        .activated {
+        .active {
             PlayerAtLeast(3)
         }
- })
-
- let bang = Card("bang") {
-    ForceDiscard(target: PlayerTarget(),
-                 card: CardSelectHandNamed(.missed),
-                 otherwise: Damage(1, player: PlayerTarget()))
-        .activated {
-            IsMaxTimesPerTurn(1)
-        }
-        .target(PlayerSelectReachable())
-        .cost(1)
- }
-
- let dynamite = Card("dynamite") {
-    Damage(3)
-        .triggered {
-            OnStartTurn()
-    }
- }
-
- */
-
-let beer = CardImpl("beer") {
-    CardActionImpl {
-        Heal(1)
-    }
-    .active {
-        PlayerAtLeast(3)
-    }
+} attr: {
+    Value("6♥️")
 }
 
 let stagecoach = CardImpl("stagecoach", actions: {
-    CardActionImpl {
-        Draw()
-    }
-    .active()
+    Draw()
+        .active()
 })
 
 let dynamite = CardImpl("dynamite", actions: {
-    CardActionImpl {
-        Luck("♥️") {
-            Heal(1)
-        } onFailure: {
-            Damage(3)
-        }
+    Luck("♥️") {
+        Heal(1)
+    } onFailure: {
+        Damage(3)
     }
     .triggered()
 })
@@ -73,7 +40,7 @@ let ctx = GameImpl {
     Deck {
         beer
         stagecoach
-//        dynamite
+        dynamite
     }
 }
 

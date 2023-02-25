@@ -31,24 +31,12 @@ public struct CardImpl: Card {
 
     public init(
         _ id: String,
-        @CardActionBuilder actions: () -> [CardAction] = { [] },
+        @CardActionsBuilder actions: () -> [CardAction] = { [] },
         @AttributeBuilder attr: () -> [Attribute] = { [] }
     ) {
         self.id = id
         self.actions = actions()
         self.attr = attr().toDictionary()
-    }
-}
-
-public struct CardActionImpl: CardAction {
-    public let effect: Effect
-    public var type: CardActionType
-    public var requirements: [Requirement]
-
-    public init(@EffectBuilder effect: () -> Effect) {
-        self.effect = effect()
-        self.type = .active
-        self.requirements = []
     }
 }
 
