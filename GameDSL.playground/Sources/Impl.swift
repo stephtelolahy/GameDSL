@@ -27,16 +27,20 @@ public struct PlayerImpl: Player {
 public struct CardImpl: Card {
     public let id: String
     public let actions: [CardAction]
-    public let attr: [String: Attribute]
+    public var attr: [String: Attribute] = [:]
 
-    public init(
-        _ id: String,
-        @CardActionsBuilder actions: () -> [CardAction] = { [] },
-        @AttributeBuilder attr: () -> [Attribute] = { [] }
-    ) {
+    public init(_ id: String, @CardActionsBuilder actions: () -> [CardAction] = { [] }) {
         self.id = id
         self.actions = actions()
-        self.attr = attr().toDictionary()
+    }
+}
+
+extension CardImpl {
+
+    public func attr(@AttributeBuilder attr: () -> [Attribute]) -> Self {
+        var copy = self
+        copy.attr = attr().toDictionary()
+        return copy
     }
 }
 

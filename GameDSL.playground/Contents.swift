@@ -7,8 +7,6 @@ let beer = CardImpl("beer") {
     .active {
         PlayerAtLeast(3)
     }
-} attr: {
-    Value("6♥️")
 }
 
 let stagecoach = CardImpl("stagecoach", actions: {
@@ -52,11 +50,11 @@ let ctx = GameImpl {
 } attr: {
     Turn("elGringo")
     Deck {
-        beer
+        beer.attr { Value("6♥️") }
         stagecoach
         dynamite
+        CardImpl("fantastic").attr { Value("A♥️") }
     }
 }
 
 print(ctx)
-

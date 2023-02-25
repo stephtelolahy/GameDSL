@@ -30,7 +30,7 @@ public extension CardAction {
         return self
     }
 
-    func triggered(@RequirementBuilder requirements: () -> [Requirement] = { [] }) -> Self {
+    func triggered(@RequirementBuilder requirements: () -> [Requirement]) -> Self {
         var copy = self
         copy.type = .triggerred
         copy.requirements = requirements()
