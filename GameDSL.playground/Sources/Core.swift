@@ -110,10 +110,11 @@ public protocol CardAction: Event {
 
 public enum CardActionType {
 
-    /// card becomes active when requirments are met, then player can choose to play it
+    /// card is active when your turn and requirments are met
+    /// then you can choose to play it
     case active
 
-    /// the side effects are applyed automatically when requirements are met
+    /// the side effects are applyed as soon as requirements are met
     case triggerred
 }
 

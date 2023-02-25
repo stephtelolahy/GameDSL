@@ -44,10 +44,11 @@ let elGringo = PlayerImpl("elGringo") {
 }
 
 let ctx = GameImpl {
-    "suzzyLafayette"
-    "vultureSam"
-    elGringo
-} attr: {
+    Players {
+        "suzzyLafayette"
+        "vultureSam"
+        elGringo
+    }
     Turn("elGringo")
     Deck {
         beer.attr { Value("6♥️") }

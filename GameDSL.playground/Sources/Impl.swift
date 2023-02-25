@@ -1,15 +1,14 @@
 import Foundation
 
 public struct GameImpl: Game {
-    public let players: [Player]
     public let attr: [String: Attribute]
     public var event: Result<Event, Error>?
 
-    public init(
-        @PlayerBuilder players: () -> [Player],
-        @AttributeBuilder attr: () -> [Attribute]
-    ) {
-        self.players = players()
+    public var players: [Player] {
+        fatalError()
+    }
+
+    public init(@AttributeBuilder attr: () -> [Attribute]) {
         self.attr = attr().toDictionary()
     }
 }
@@ -35,9 +34,8 @@ public struct CardImpl: Card {
     }
 }
 
-extension CardImpl {
-
-    public func attr(@AttributeBuilder attr: () -> [Attribute]) -> Self {
+public extension CardImpl {
+    func attr(@AttributeBuilder attr: () -> [Attribute]) -> Self {
         var copy = self
         copy.attr = attr().toDictionary()
         return copy
