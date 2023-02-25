@@ -10,9 +10,16 @@ let beer = CardImpl("beer") {
 }
 
 let stagecoach = CardImpl("stagecoach", actions: {
-    Draw()
-        .active()
+    Group {
+        Draw()
+        Draw()
+    }
+    .active()
 })
+
+// TODO: equipement
+
+// TODO: handicap
 
 let dynamite = CardImpl("dynamite", actions: {
     Luck("♥️") {
