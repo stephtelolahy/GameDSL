@@ -2,7 +2,9 @@ import Foundation
 
 let beer = CardImpl("beer", actions:  {
     CardActionImpl(playable: true) {
-        Heal(1)
+        Heal {
+            PlayerActor()
+        }
     } requirements: {
         PlayerAtLeast(3)
     }
@@ -10,20 +12,21 @@ let beer = CardImpl("beer", actions:  {
 
 let stagecoach = CardImpl("stagecoach", actions: {
     CardActionImpl(playable: true) {
-        Draw()
-        Draw()
-    }
-})
-
-let dynamite = CardImpl("dynamite", actions: {
-    CardActionImpl(playable: false) {
-        Luck("♥️") {
-            Heal(1)
-        } onFailure: {
-            Damage(3)
+        Draw {
+            PlayerActor()
         }
     }
 })
+
+//let dynamite = CardImpl("dynamite", actions: {
+//    CardActionImpl(playable: false) {
+//        Luck("♥️") {
+//            Heal(1)
+//        } onFailure: {
+//            Damage(3)
+//        }
+//    }
+//})
 
 let elGringo = PlayerImpl("elGringo") {
     Health(2)
@@ -42,7 +45,7 @@ let ctx = GameImpl {
     Deck {
         beer
         stagecoach
-        dynamite
+//        dynamite
     }
 }
 

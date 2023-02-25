@@ -118,5 +118,5 @@ public protocol Requirement {
 public protocol Effect: Event {
 
     /// All attributes
-//    var attr: [String: Attribute] { get }
+    var attr: [String: Attribute] { get }
 }
