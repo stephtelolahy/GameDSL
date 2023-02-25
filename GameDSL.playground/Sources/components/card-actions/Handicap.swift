@@ -4,10 +4,12 @@ import Foundation
 public struct Handicap: CardAction {
     public var type: CardActionType = .active
     public var requirements: [Requirement] = []
-    public var target: ArgPlayer?
     public var ctx: [String: Attribute] = [:]
+    let target: ArgPlayer
 
-    public init() { }
+    public init(target: ArgPlayer) {
+        self.target = target
+    }
 
     public func resolve(_ ctx: Game) -> Result<EventOutput, Error> {
         fatalError()

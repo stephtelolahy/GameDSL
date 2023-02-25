@@ -4,7 +4,6 @@ import Foundation
 public struct Luck: CardAction {
     public var type: CardActionType = .active
     public var requirements: [Requirement] = []
-    public var target: ArgPlayer?
     public var ctx: [String: Attribute] = [:]
     let regex: String
     let onSuccess: [CardAction]

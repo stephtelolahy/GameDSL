@@ -4,7 +4,6 @@ import Foundation
 public struct Damage: CardAction {
     public var type: CardActionType = .active
     public var requirements: [Requirement] = []
-    public var target: ArgPlayer?
     public var ctx: [String: Attribute] = [:]
     let value: Int
     let player: ArgPlayer

@@ -36,10 +36,4 @@ public extension CardAction {
         copy.requirements = requirements()
         return self
     }
-
-    func target(_ target: ArgPlayer) -> Self {
-        var copy = self
-        copy.target = target
-        return self
-    }
 }

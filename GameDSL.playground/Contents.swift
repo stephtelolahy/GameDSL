@@ -9,6 +9,13 @@ let beer = CardImpl("beer") {
     }
 }
 
+let duel = CardImpl("duel") {
+    Play(target: PlayerSelectAny()) {
+        Damage(1)
+    }
+    .active()
+}
+
 let stagecoach = CardImpl("stagecoach") {
     Play {
         Draw()
@@ -23,8 +30,7 @@ let mustang = CardImpl("mustang") {
 }
 
 let jail = CardImpl("jail") {
-    Handicap()
-        .target(PlayerSelectAny())
+    Handicap(target: PlayerSelectAny())
         .active()
 }
 
@@ -61,6 +67,7 @@ let ctx = GameImpl {
         beer.attr { Value("6♥️") }
         stagecoach
         dynamite
+        duel
         CardImpl("secret").attr { Value("J♣️") }
     }
 }

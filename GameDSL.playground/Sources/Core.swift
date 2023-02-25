@@ -97,13 +97,7 @@ public protocol CardAction: Event {
 
     /// requirements for playing this card
     var requirements: [Requirement] { get set }
-
-    /// required target to play this card
-    var target: ArgPlayer? { get set }
-
-    /// cost on playing this card
-//    var cost: Any? { get }
-
+    
     /// Resolving context
     var ctx: [String: Attribute] { get set }
 }
