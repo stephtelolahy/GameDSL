@@ -1,18 +1,17 @@
 import Foundation
 
+/// Flip over the top card of the deck, then apply effects according to suits and values
 public struct Luck: Effect {
     public var attr: [String: Attribute]
-    let regex: String
-    let onSuccess: [Effect]
-    let onFailure: [Effect]
 
     public init(_ regex: String,
                 @EffectBuilder _ onSuccess: () -> [Effect],
                 @EffectBuilder onFailure: () -> [Effect] = { [] }) {
         self.attr = [:]
-        self.regex = regex
-        self.onSuccess = onSuccess()
-        self.onFailure = onFailure()
+        // TODO: setup attributes
+//        self.regex = regex
+//        self.onSuccess = onSuccess()
+//        self.onFailure = onFailure()
     }
 
     public func resolve(_ ctx: Game) -> Result<EventOutput, Error> {

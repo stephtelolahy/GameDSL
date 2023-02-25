@@ -1,5 +1,6 @@
 import Foundation
 
+/// Draw top deck card
 public struct Draw: Effect {
     public var attr: [String: Attribute]
 
