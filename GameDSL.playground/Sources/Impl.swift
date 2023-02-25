@@ -20,16 +20,19 @@ public struct CardActionImpl: CardAction {
     public let playable: Bool
     public let requirements: [Requirement]
     public let effects: [Effect]
-    public let cost: Int
+    public var cost: String?
+    public var target: String?
 
     public init(
         playable: Bool,
         @EffectBuilder effects: () -> [Effect],
-    @RequirementBuilder requirements: () -> [Requirement] = { [] }) {
+        @RequirementBuilder requirements: () -> [Requirement] = { [] }
+    ) {
         self.playable = playable
         self.effects = effects()
         self.requirements = requirements()
-        self.cost = 0
+        self.cost = nil
+        self.target = nil
     }
 }
 
@@ -37,7 +40,7 @@ public struct CardActionImpl: CardAction {
 public struct GameImpl: Game {
     public let attr: [Attribute]
     public let players: [Player]
-    public let locations: [CardLocation]
+    public let locations: [CardLocationAttribute]
     public var event: Result<Event, Error>?
 
     public init(
@@ -53,7 +56,7 @@ public struct GameImpl: Game {
 public struct PlayerImpl: Player {
     public let id: String
     public let attr: [Attribute]
-    public let locations: [CardLocation]
+    public let locations: [CardLocationAttribute]
 
     public init(_ id: String, @AttributeBuilder _ attr: () -> [Attribute] = { [] }) {
         self.id = id

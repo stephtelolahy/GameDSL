@@ -6,4 +6,8 @@ public struct Heal: Effect {
     public init(_ value: Int) {
         self.value = value
     }
+
+    public func resolve(_ ctx: Game) -> Result<EventOutput, Error> {
+        fatalError()
+    }
 }

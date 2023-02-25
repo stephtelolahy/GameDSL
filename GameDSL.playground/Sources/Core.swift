@@ -1,60 +1,104 @@
 import Foundation
 
-/// Trading card games model
+/// Trading card games state
 /// It is turn based, cards have actions, cards have properties and cards have rules
 public protocol Game {
+
+    /// All attributes of game state
     var attr: [Attribute] { get }
+
+    /// all players
     var players: [Player] { get }
+
+    /// last occurred event
     var event: Result<Event, Error>? { get set }
 }
 
-/// Any card, player or game attribute
-/// Expected to find single Value for each attribute name
+/// Any card, player, game attribute
+/// Expected to be unique
 public protocol Attribute {
+
+    /// attribute name
     var id: String { get }
 }
 
-/// Game event
+/// Function that causes any change in the game state
 public protocol Event {
-//    func resolve(_ ctx: Game) -> Result<Game, Error>
+    func resolve(_ ctx: Game) -> Result<EventOutput, Error>
 }
 
-/// Players who are participating in a game
+/// Resolving an event may update game or push another event
+public protocol EventOutput {
+
+    /// Updated game state
+    var state: Game? { get }
+
+    /// Children to be queued for resolving
+    var children: [Event]? { get }
+}
+
+/// Player who is participating in a game
 public protocol Player {
+
+    /// player unique identifier
     var id: String { get }
+
+    /// All player attributes
     var attr: [Attribute] { get }
 }
 
 /// Card Location in the game
-public protocol CardLocation: Attribute {
+public protocol CardLocationAttribute: Attribute {
+
+    /// All cards in the location
     var cards: [Card] { get }
-//    var visibility: [String] { get }
+
+    /// players who can see the content of this location
+    var visibility: [String]? { get }
 }
 
 /// Cards that are used in a game.
 /// Cards can have a cost, can have multiple properties, define additional rules, have actions that can be played and have side effects that happen when they are being played.
 public protocol Card {
+
+    /// card unique identifier
     var id: String { get }
+
+    /// All card attributes
     var attributes: [Attribute] { get }
+
+    /// Actions that can be performed with the card
     var actions: [CardAction] { get }
 }
 
 public protocol CardAction {
-    /// When `playable` == ` true`, the card becomes active when requirments is met, then player can choose to play it
-    /// When `playable` == `false,` then card action is triggered automatically
+
+    /// The manner an action is performed
+    /// if  `true`, the card becomes active when requirments is met, then player can play it
+    /// If `false,` then card action is triggered automatically, the side effects are applyed
     var playable: Bool { get }
+
+    /// requirements for playing this card
     var requirements: [Requirement] { get }
+
+    /// side effects on playing this card
     var effects: [Effect] { get }
-    var cost: Int { get }
+
+    /// cost on playing this card
+    var cost: String? { get }
+
+    /// required target to play this card
+    var target: String? { get }
 }
 
-/// Define the constraints to play a card
+/// Function  defining constraints to play a card
 public protocol Requirement {
-//    func match(_ ctx: Game) -> Result<Void, Error>
+    func match(_ ctx: Game) -> Result<Void, Error>
 }
 
-/// Card side effects
+/// Function defining card side effects
 public protocol Effect: Event {
-    /// Context data for resolving
-//    var ctx: [Attribute] { get }
+
+    /// All effect attributes
+//    var attr: [Attribute] { get }
 }

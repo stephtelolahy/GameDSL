@@ -12,5 +12,9 @@ public struct Luck: Effect {
         self.onSuccess = onSuccess()
         self.onFailure = onFailure()
     }
+
+    public func resolve(_ ctx: Game) -> Result<EventOutput, Error> {
+        fatalError()
+    }
 }
 
