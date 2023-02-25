@@ -2,20 +2,31 @@ import Foundation
 
 /*
 
- let beer = CardImpl("beer") {
+ let beer = Card("beer") {
     Heal(1)
         .activated {
             PlayerAtLeast(3)
         }
  })
 
- let dynamite = CardImpl("dynamite") {
+ let bang = Card("bang") {
+    ForceDiscard(target: PlayerTarget(),
+                 card: CardSelectHandNamed(.missed),
+                 otherwise: Damage(1, player: PlayerTarget()))
+        .activated {
+            IsMaxTimesPerTurn(1)
+        }
+        .target(PlayerSelectReachable())
+        .cost(1)
+ }
+
+ let dynamite = Card("dynamite") {
     Damage(3)
         .triggered {
             OnStartTurn()
     }
  }
-
+ 
  */
 
 let beer = CardImpl("beer", actions:  {
