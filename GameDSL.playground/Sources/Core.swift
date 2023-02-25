@@ -1,4 +1,36 @@
 import Foundation
+import Combine
+
+/// The game engine
+public protocol Engine {
+
+    /// observable game state
+    var state: CurrentValueSubject<Game, Never> { get }
+
+    /// events queue that have to be resolved in order
+    var queue: [Event] { get }
+
+    /// input a move
+    func input(_ move: Event)
+
+    /// process event queue
+    func update()
+}
+
+/// Function that causes any change in the game state
+public protocol Event {
+    func resolve(_ ctx: Game) -> Result<EventOutput, Error>
+}
+
+/// Resolving an event may update game or push another event
+public protocol EventOutput {
+
+    /// Updated state
+    var state: Game? { get }
+
+    /// Children to be queued for resolving
+    var children: [Event]? { get }
+}
 
 /// Trading card games state
 /// It is turn based, cards have actions, cards have properties and cards have rules
@@ -20,21 +52,6 @@ public protocol Attribute {
 
     /// attribute name
     var id: String { get }
-}
-
-/// Function that causes any change in the game state
-public protocol Event {
-    func resolve(_ ctx: Game) -> Result<EventOutput, Error>
-}
-
-/// Resolving an event may update game or push another event
-public protocol EventOutput {
-
-    /// Updated game state
-    var state: Game? { get }
-
-    /// Children to be queued for resolving
-    var children: [Event]? { get }
 }
 
 /// Player who is participating in a game
