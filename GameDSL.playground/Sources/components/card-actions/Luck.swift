@@ -6,12 +6,12 @@ public struct Luck: CardAction {
     public var requirements: [Requirement] = []
     public var ctx: [String: Attribute] = [:]
     let regex: String
-    let onSuccess: CardAction
-    let onFailure: CardAction?
+    let onSuccess: [CardAction]
+    let onFailure: [CardAction]?
 
     public init(_ regex: String,
-                @CardActionBuilder _ onSuccess: () -> CardAction,
-                @CardActionBuilder onFailure: () -> CardAction? = { nil }) {
+                @CardActionsBuilder _ onSuccess: () -> [CardAction],
+                @CardActionsBuilder onFailure: () -> [CardAction]? = { nil }) {
         self.regex = regex
         self.onSuccess = onSuccess()
         self.onFailure = onFailure()

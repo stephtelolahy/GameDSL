@@ -54,7 +54,7 @@ let ctx = GameImpl {
         beer.attr { Value("6♥️") }
         stagecoach
         dynamite
-        CardImpl("fantastic").attr { Value("A♥️") }
+        CardImpl("secret").attr { Value("A♥️") }
     }
 }
 
