@@ -9,22 +9,29 @@ let beer = CardImpl("beer") {
     }
 }
 
-let stagecoach = CardImpl("stagecoach", actions: {
+let stagecoach = CardImpl("stagecoach") {
     Play {
         Draw()
         Draw()
     }
     .active()
-})
+}
 
 let mustang = CardImpl("mustang") {
     Equip()
         .active()
 }
 
-let dynamite = CardImpl("dynamite", actions: {
+let jail = CardImpl("jail") {
     Handicap()
+        .target(PlayerSelectAny())
         .active()
+}
+
+let dynamite = CardImpl("dynamite") {
+    Equip()
+        .active()
+    
     Luck("♥️") {
         Heal(1)
     } onFailure: {
@@ -33,7 +40,7 @@ let dynamite = CardImpl("dynamite", actions: {
     .triggered {
         OnSetTurn()
     }
-})
+}
 
 let elGringo = PlayerImpl("elGringo") {
     Health(2)
@@ -54,7 +61,7 @@ let ctx = GameImpl {
         beer.attr { Value("6♥️") }
         stagecoach
         dynamite
-        CardImpl("secret").attr { Value("A♥️") }
+        CardImpl("secret").attr { Value("J♣️") }
     }
 }
 

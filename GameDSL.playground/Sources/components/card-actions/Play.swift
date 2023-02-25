@@ -4,6 +4,7 @@ import Foundation
 public struct Play: CardAction {
     public var type: CardActionType = .active
     public var requirements: [Requirement] = []
+    public var target: ArgPlayer?
     public var ctx: [String: Attribute] = [:]
     let content: [CardAction]
 

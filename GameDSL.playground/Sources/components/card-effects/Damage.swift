@@ -1,9 +1,10 @@
 import Foundation
 
-/// Restore player's health, limited to maxHealth
-public struct Heal: CardAction {
+/// Deals damage to a player, attempting to reduce its Health by the stated amount
+public struct Damage: CardAction {
     public var type: CardActionType = .active
     public var requirements: [Requirement] = []
+    public var target: ArgPlayer?
     public var ctx: [String: Attribute] = [:]
     let value: Int
     let player: ArgPlayer
