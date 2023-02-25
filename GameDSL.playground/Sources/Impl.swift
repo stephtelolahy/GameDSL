@@ -56,7 +56,7 @@ public struct CardActionImpl: CardAction {
     }
 }
 
-extension Array where Element == Attribute {
+private extension Array where Element == Attribute {
 
     func toDictionary() -> [String: Attribute] {
         reduce(into: [String: Attribute]()) {

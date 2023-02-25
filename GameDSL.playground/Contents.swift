@@ -2,9 +2,7 @@ import Foundation
 
 let beer = CardImpl("beer", actions:  {
     CardActionImpl(playable: true) {
-        Heal {
-            PlayerActor()
-        }
+        Heal(1)
     } requirements: {
         PlayerAtLeast(3)
     }
@@ -12,9 +10,7 @@ let beer = CardImpl("beer", actions:  {
 
 let stagecoach = CardImpl("stagecoach", actions: {
     CardActionImpl(playable: true) {
-        Draw {
-            PlayerActor()
-        }
+        Draw()
     }
 })
 

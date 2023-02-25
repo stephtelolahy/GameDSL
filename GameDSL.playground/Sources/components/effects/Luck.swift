@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Luck: Effect {
-    public let attr: [String: Attribute]
+    public var attr: [String: Attribute]
     let regex: String
     let onSuccess: [Effect]
     let onFailure: [Effect]

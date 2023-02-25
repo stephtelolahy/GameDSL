@@ -91,7 +91,7 @@ public protocol Card {
 
 public protocol CardAction {
 
-    /// The manner an action is performed
+    /// The manner an action is dispatched
     /// if  `true`, the card becomes active when requirments is met, then player can play it
     /// If `false,` then card action is triggered automatically, the side effects are applyed
     var playable: Bool { get }
@@ -118,5 +118,5 @@ public protocol Requirement {
 public protocol Effect: Event {
 
     /// All attributes
-    var attr: [String: Attribute] { get }
+    var attr: [String: Attribute] { get set }
 }

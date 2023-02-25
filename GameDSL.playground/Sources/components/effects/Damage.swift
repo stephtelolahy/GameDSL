@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Damage: Effect {
-    public let attr: [String: Attribute]
+    public var attr: [String: Attribute]
 
     public init(@AttributeBuilder attr: () -> [Attribute]) {
         self.attr = attr().toDictionary()
