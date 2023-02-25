@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - Abilities
+
 let endTurn = CardImpl("endTurn") {
     Group {
         Repeat(NumExcessHand()) {
@@ -10,14 +12,31 @@ let endTurn = CardImpl("endTurn") {
     .active()
 }
 
-let startTurn = CardImpl("startTurn") {
-    Repeat(NumExact(2)) {
+let draw2CardsOnSetTurn = CardImpl("draw2CardsOnSetTurn") {
+    Repeat(2) {
         Draw()
     }
     .triggered {
         OnSetTurn()
     }
 }
+
+let eliminateOnLooseLastHealth = CardImpl("eliminateOnLooseLastHealth") {
+    Eliminate()
+        .triggered {
+            OnLooseLastHealth()
+        }
+}
+
+let setGameOverOnEliminated = CardImpl("setGameOverOnEliminated") {
+    SetGameOver()
+        .triggered {
+            OnEliminated()
+            IsGameOver()
+        }
+}
+
+// MARK: - Collectible
 
 let beer = CardImpl("beer") {
     Play {
@@ -75,7 +94,9 @@ let ctx = GameImpl {
             Health(2)
             Abilities {
                 endTurn
-                startTurn
+                draw2CardsOnSetTurn
+                eliminateOnLooseLastHealth
+                setGameOverOnEliminated
             }
             Hand {
                 "gatling"
@@ -98,17 +119,6 @@ print(ctx)
 
 /*
  enum CardList {
-
-     static let abilities: [CardImpl] = [
-         .init(name: .leaveGame,
-               playMode: PlayAbility(),
-               triggers: [OnLooseLastHealth()],
-               onTrigger: [Eliminate()]),
-         .init(name: .gameOver,
-               playMode: PlayAbility(),
-               triggers: [OnEliminated(), IsGameOver()],
-               onTrigger: [EndGame()])
-     ]
 
      static let collectibles: [CardImpl] = [
          .init(name: .beer,

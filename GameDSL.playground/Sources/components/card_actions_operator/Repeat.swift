@@ -13,6 +13,11 @@ public struct Repeat: CardAction {
         self.content = content()
     }
 
+    public init(_ times: Int, @CardActionBuilder content: () -> CardAction) {
+        self.times = NumExact(times)
+        self.content = content()
+    }
+
     public func resolve(_ ctx: Game) -> Result<EventOutput, Error> {
         fatalError()
     }
