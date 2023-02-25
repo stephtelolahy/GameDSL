@@ -3,11 +3,11 @@ import Foundation
 @resultBuilder
 public struct EffectBuilder {
 
-    public static func buildBlock(_ components: Effect...) -> [Effect] {
-        components
+    public static func buildBlock(_ component: Effect) -> Effect {
+        component
     }
 
-    static func buildArray(_ components: [[Effect]]) -> [Effect] {
-        components.flatMap { $0 }
+    static func buildArray(_ components: [Effect]) -> Effect {
+        fatalError()
     }
 }

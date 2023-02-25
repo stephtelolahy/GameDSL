@@ -29,28 +29,31 @@ import Foundation
 
  */
 
-let beer = CardImpl("beer", actions:  {
-    CardActionImpl(type: .active) {
+let beer = CardImpl("beer") {
+    CardActionImpl {
         Heal(1)
-    } requirements: {
+    }
+    .active {
         PlayerAtLeast(3)
     }
-})
+}
 
 let stagecoach = CardImpl("stagecoach", actions: {
-    CardActionImpl(type: .active) {
+    CardActionImpl {
         Draw()
     }
+    .active()
 })
 
 let dynamite = CardImpl("dynamite", actions: {
-    CardActionImpl(type: .triggerred) {
+    CardActionImpl {
         Luck("♥️") {
             Heal(1)
         } onFailure: {
             Damage(3)
         }
     }
+    .triggered()
 })
 
 let elGringo = PlayerImpl("elGringo") {

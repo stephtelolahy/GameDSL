@@ -5,8 +5,8 @@ public struct Luck: Effect {
     public var attr: [String: Attribute]
 
     public init(_ regex: String,
-                @EffectBuilder _ onSuccess: () -> [Effect],
-                @EffectBuilder onFailure: () -> [Effect] = { [] }) {
+                @EffectBuilder _ onSuccess: () -> Effect,
+                @EffectBuilder onFailure: () -> Effect? = { nil }) {
         self.attr = [:]
         // TODO: setup attributes
 //        self.regex = regex

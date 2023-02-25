@@ -91,11 +91,11 @@ public protocol Card {
 
 public protocol CardAction {
 
+    /// action's side effect
+    var effect: Effect { get }
+
     /// The manner an action is dispatched
     var type: CardActionType { get }
-
-    /// side effects on playing this card
-    var effects: [Effect] { get }
 
     /// requirements for playing this card
     var requirements: [Requirement] { get }
