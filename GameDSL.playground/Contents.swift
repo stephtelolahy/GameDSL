@@ -1,33 +1,40 @@
 import Foundation
 
 let beer = CardImpl("beer") {
-    Heal(1)
-        .active {
-            PlayerAtLeast(3)
-        }
+    Play {
+        Heal(1)
+    }
+    .active {
+        PlayerAtLeast(3)
+    }
 } attr: {
     Value("6♥️")
 }
 
 let stagecoach = CardImpl("stagecoach", actions: {
-    Group {
+    Play {
         Draw()
         Draw()
     }
     .active()
 })
 
-// TODO: equipement
-
-// TODO: handicap
+let mustang = CardImpl("mustang") {
+    Equip()
+        .active()
+}
 
 let dynamite = CardImpl("dynamite", actions: {
+    Handicap()
+        .active()
     Luck("♥️") {
         Heal(1)
     } onFailure: {
         Damage(3)
     }
-    .triggered()
+    .triggered {
+        OnSetTurn()
+    }
 })
 
 let elGringo = PlayerImpl("elGringo") {
