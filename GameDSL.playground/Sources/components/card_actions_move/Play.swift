@@ -1,14 +1,12 @@
 import Foundation
 
 /// Play a card, discard immediately
-public struct Play: CardAction {
-    public var type: CardActionType = .active
-    public var requirements: [Requirement] = []
+public struct Play: Effect {
     public var ctx: [String: Attribute] = [:]
     let target: ArgPlayer?
-    let content: [CardAction]
+    let content: [Effect]
 
-    public init(target: ArgPlayer? = nil, @CardActionsBuilder content: () -> [CardAction]) {
+    public init(target: ArgPlayer? = nil, @EffectsBuilder content: () -> [Effect]) {
         self.target = target
         self.content = content()
     }

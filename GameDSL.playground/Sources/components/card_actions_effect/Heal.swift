@@ -1,9 +1,7 @@
 import Foundation
 
 /// Restore player's health, limited to maxHealth
-public struct Heal: CardAction {
-    public var type: CardActionType = .active
-    public var requirements: [Requirement] = []
+public struct Heal: Effect {
     public var ctx: [String: Attribute] = [:]
     let value: Int
     let player: ArgPlayer

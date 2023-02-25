@@ -1,9 +1,7 @@
 import Foundation
 
 /// Remove player from game
-public struct Eliminate: CardAction {
-    public var type: CardActionType = .active
-    public var requirements: [Requirement] = []
+public struct Eliminate: Effect {
     public var ctx: [String: Attribute] = [:]
     let player: ArgPlayer
 

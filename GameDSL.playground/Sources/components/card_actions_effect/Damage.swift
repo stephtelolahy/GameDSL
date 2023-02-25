@@ -1,9 +1,7 @@
 import Foundation
 
 /// Deals damage to a player, attempting to reduce its Health by the stated amount
-public struct Damage: CardAction {
-    public var type: CardActionType = .active
-    public var requirements: [Requirement] = []
+public struct Damage: Effect {
     public var ctx: [String: Attribute] = [:]
     let value: Int
     let player: ArgPlayer

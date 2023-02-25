@@ -1,13 +1,11 @@
 import Foundation
 
 /// Perform an array of actions
-public struct Group: CardAction {
-    public var type: CardActionType = .active
-    public var requirements: [Requirement] = []
+public struct Group: Effect {
     public var ctx: [String: Attribute] = [:]
-    let content: [CardAction]
+    let content: [Effect]
 
-    public init(@CardActionsBuilder content: () -> [CardAction]) {
+    public init(@EffectsBuilder content: () -> [Effect]) {
         self.content = content()
     }
 

@@ -1,9 +1,7 @@
 import Foundation
 
 /// Handicap another player with a card, ie put in other's play location
-public struct Handicap: CardAction {
-    public var type: CardActionType = .active
-    public var requirements: [Requirement] = []
+public struct Handicap: Effect {
     public var ctx: [String: Attribute] = [:]
     let target: ArgPlayer
 

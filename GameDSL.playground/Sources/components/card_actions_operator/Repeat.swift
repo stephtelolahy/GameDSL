@@ -1,19 +1,17 @@
 import Foundation
 
 /// Repeat an effect
-public struct Repeat: CardAction {
-    public var type: CardActionType = .active
-    public var requirements: [Requirement] = []
+public struct Repeat: Effect {
     public var ctx: [String: Attribute] = [:]
     var times: ArgNumber
-    var content: CardAction
+    var content: Effect
 
-    public init(_ times: ArgNumber, @CardActionBuilder content: () -> CardAction) {
+    public init(_ times: ArgNumber, @EffectBuilder content: () -> Effect) {
         self.times = times
         self.content = content()
     }
 
-    public init(_ times: Int, @CardActionBuilder content: () -> CardAction) {
+    public init(_ times: Int, @EffectBuilder content: () -> Effect) {
         self.times = NumExact(times)
         self.content = content()
     }

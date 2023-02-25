@@ -2,9 +2,7 @@ import Foundation
 
 /// Discard a player's card to discard pile
 /// Actor is the card chooser
-public struct Discard: CardAction {
-    public var type: CardActionType = .active
-    public var requirements: [Requirement] = []
+public struct Discard: Effect {
     public var ctx: [String: Attribute] = [:]
     let player: ArgPlayer
     let card: ArgCard

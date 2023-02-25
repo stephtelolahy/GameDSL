@@ -1,9 +1,7 @@
 import Foundation
 
 /// Set game over
-public struct SetGameOver: CardAction {
-    public var type: CardActionType = .active
-    public var requirements: [Requirement] = []
+public struct SetGameOver: Effect {
     public var ctx: [String: Attribute] = [:]
 
     public init() {}

@@ -20,20 +20,3 @@ public struct CardActionBuilder {
         fatalError()
     }
 }
-
-public extension CardAction {
-
-    func active(@RequirementBuilder requirements: () -> [Requirement] = { [] }) -> Self {
-        var copy = self
-        copy.type = .active
-        copy.requirements = requirements()
-        return self
-    }
-
-    func triggered(@RequirementBuilder requirements: () -> [Requirement]) -> Self {
-        var copy = self
-        copy.type = .triggerred
-        copy.requirements = requirements()
-        return self
-    }
-}

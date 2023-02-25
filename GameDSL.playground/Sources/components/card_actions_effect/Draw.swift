@@ -1,9 +1,7 @@
 import Foundation
 
 /// Draw top deck card
-public struct Draw: CardAction {
-    public var type: CardActionType = .active
-    public var requirements: [Requirement] = []
+public struct Draw: Effect {
     public var ctx: [String: Attribute] = [:]
     let player: ArgPlayer
 

@@ -42,6 +42,27 @@ public extension CardImpl {
     }
 }
 
+public struct CardActionImpl: CardAction {
+    public let effect: Effect
+    public let type: CardActionType
+    public let requirements: [Requirement]
+}
+
+public extension Effect {
+
+    func active(@RequirementBuilder requirements: () -> [Requirement] = { [] }) -> CardAction {
+        CardActionImpl(effect: self,
+                       type: .active,
+                       requirements: requirements())
+    }
+
+    func triggered(@RequirementBuilder requirements: () -> [Requirement]) -> CardAction {
+        CardActionImpl(effect: self,
+                       type: .triggered,
+                       requirements: requirements())
+    }
+}
+
 extension Array where Element == Attribute {
 
     func toDictionary() -> [String: Attribute] {

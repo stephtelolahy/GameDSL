@@ -1,9 +1,7 @@
 import Foundation
 
 /// Equip with a card, ie put in self's play location
-public struct Equip: CardAction {
-    public var type: CardActionType = .active
-    public var requirements: [Requirement] = []
+public struct Equip: Effect {
     public var ctx: [String: Attribute] = [:]
 
     public init() { }

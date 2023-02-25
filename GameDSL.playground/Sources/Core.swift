@@ -79,7 +79,7 @@ public protocol CardLocationAttribute: Attribute {
 /// have actions that can be played and have side effects that happen when they are being played.
 public protocol Card {
 
-    /// card unique identifier
+    /// Card unique identifier
     var id: String { get }
 
     /// Actions that can be performed with the card
@@ -90,16 +90,16 @@ public protocol Card {
 }
 
 /// Function defining card side effects
-public protocol CardAction: Event {
+public protocol CardAction {
+
+    /// Side effect on dispatching action
+    var effect: Effect { get }
 
     /// The manner an action is dispatched
-    var type: CardActionType { get set }
+    var type: CardActionType { get }
 
     /// requirements for playing this card
-    var requirements: [Requirement] { get set }
-    
-    /// Resolving context
-    var ctx: [String: Attribute] { get set }
+    var requirements: [Requirement] { get }
 }
 
 public enum CardActionType {
@@ -109,10 +109,16 @@ public enum CardActionType {
     case active
 
     /// the side effects are applyed as soon as requirements are met
-    case triggerred
+    case triggered
 }
 
 /// Function  defining constraints to play a card
 public protocol Requirement {
     func match(_ ctx: Game) -> Result<Void, Error>
+}
+
+public protocol Effect: Event {
+
+    /// Resolving context
+    var ctx: [String: Attribute] { get set }
 }

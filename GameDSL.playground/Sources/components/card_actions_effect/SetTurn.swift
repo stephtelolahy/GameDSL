@@ -1,9 +1,7 @@
 import Foundation
 
 /// Set turn
-public struct SetTurn: CardAction {
-    public var type: CardActionType = .active
-    public var requirements: [Requirement] = []
+public struct SetTurn: Effect {
     public var ctx: [String: Attribute] = [:]
     let player: ArgPlayer
 
