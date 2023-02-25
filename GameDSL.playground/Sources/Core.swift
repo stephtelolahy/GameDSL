@@ -4,11 +4,11 @@ import Foundation
 /// It is turn based, cards have actions, cards have properties and cards have rules
 public protocol Game {
 
-    /// All attributes of game state
-    var attr: [String: Attribute] { get }
-
     /// all players
     var players: [Player] { get }
+
+    /// All attributes
+    var attr: [String: Attribute] { get }
 
     /// last occurred event
     var event: Result<Event, Error>? { get set }
@@ -43,7 +43,7 @@ public protocol Player {
     /// player unique identifier
     var id: String { get }
 
-    /// All player attributes
+    /// All attributes
     var attr: [String: Attribute] { get }
 }
 
@@ -65,11 +65,11 @@ public protocol Card {
     /// card unique identifier
     var id: String { get }
 
-    /// All card attributes
-    var attr: [String: Attribute] { get }
-
     /// Actions that can be performed with the card
     var actions: [CardAction] { get }
+
+    /// All attributes
+    var attr: [String: Attribute] { get }
 }
 
 public protocol CardAction {
@@ -100,6 +100,6 @@ public protocol Requirement {
 /// Function defining card side effects
 public protocol Effect: Event {
 
-    /// All effect attributes
+    /// All attributes
 //    var attr: [String: Attribute] { get }
 }
