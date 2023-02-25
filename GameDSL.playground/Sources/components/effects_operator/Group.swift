@@ -1,6 +1,6 @@
 import Foundation
 
-/// Perform an array of actions
+/// Dispatch effects sequentially
 public struct Group: Effect {
     public var ctx: [String: Attribute] = [:]
     let content: [Effect]
