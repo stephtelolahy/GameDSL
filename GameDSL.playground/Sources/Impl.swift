@@ -28,7 +28,7 @@ public struct CardImpl: Card {
     public let actions: [CardAction]
     public var attr: [String: Attribute] = [:]
 
-    public init(_ id: String, @CardActionsBuilder actions: () -> [CardAction] = { [] }) {
+    public init(_ id: String, @CardActionBuilder actions: () -> [CardAction] = { [] }) {
         self.id = id
         self.actions = actions()
     }

@@ -43,7 +43,7 @@ public protocol Game {
     var attr: [String: Attribute] { get }
 
     /// last occurred event
-    var event: Result<Event, Error>? { get set }
+    var event: Result<Event, Error>? { get }
 }
 
 /// Any card, player, game attribute
