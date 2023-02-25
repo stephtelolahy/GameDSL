@@ -1,10 +1,11 @@
 import Foundation
 
-public struct PlayerAtLeast: Requirement {
-    let minCount: Int
+/// The minimum number of active players is X
+public struct IsPlayersAtLeast: Requirement {
+    let count: Int
 
     public init(_ count: Int) {
-        self.minCount = count
+        self.count = count
     }
 
     public func match(_ ctx: Game) -> Result<Void, Error> {

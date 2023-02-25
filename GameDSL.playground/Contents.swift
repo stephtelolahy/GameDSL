@@ -10,12 +10,21 @@ let endTurn = CardImpl("endTurn") {
     .active()
 }
 
+let startTurn = CardImpl("startTurn") {
+    Repeat(NumExact(2)) {
+        Draw()
+    }
+    .triggered {
+        OnSetTurn()
+    }
+}
+
 let beer = CardImpl("beer") {
     Play {
         Heal(1)
     }
     .active {
-        PlayerAtLeast(3)
+        IsPlayersAtLeast(3)
     }
 }
 
@@ -66,6 +75,7 @@ let ctx = GameImpl {
             Health(2)
             Abilities {
                 endTurn
+                startTurn
             }
             Hand {
                 "gatling"
@@ -90,12 +100,6 @@ print(ctx)
  enum CardList {
 
      static let abilities: [CardImpl] = [
-
-         .init(name: .startTurn,
-               playMode: PlayAbility(),
-               triggers: [OnSetTurn()],
-               onTrigger: [Repeat(times: NumExact(2),
-                                  effect: DrawDeck())]),
          .init(name: .leaveGame,
                playMode: PlayAbility(),
                triggers: [OnLooseLastHealth()],
