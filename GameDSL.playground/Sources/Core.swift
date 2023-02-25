@@ -5,7 +5,7 @@ import Foundation
 public protocol Game {
 
     /// All attributes of game state
-    var attr: [Attribute] { get }
+    var attr: [String: Attribute] { get }
 
     /// all players
     var players: [Player] { get }
@@ -44,7 +44,7 @@ public protocol Player {
     var id: String { get }
 
     /// All player attributes
-    var attr: [Attribute] { get }
+    var attr: [String: Attribute] { get }
 }
 
 /// Card Location in the game
@@ -58,14 +58,15 @@ public protocol CardLocationAttribute: Attribute {
 }
 
 /// Cards that are used in a game.
-/// Cards can have a cost, can have multiple properties, define additional rules, have actions that can be played and have side effects that happen when they are being played.
+/// Cards can have a cost, can have multiple properties, define additional rules,
+/// have actions that can be played and have side effects that happen when they are being played.
 public protocol Card {
 
     /// card unique identifier
     var id: String { get }
 
     /// All card attributes
-    var attributes: [Attribute] { get }
+    var attr: [String: Attribute] { get }
 
     /// Actions that can be performed with the card
     var actions: [CardAction] { get }
@@ -78,17 +79,17 @@ public protocol CardAction {
     /// If `false,` then card action is triggered automatically, the side effects are applyed
     var playable: Bool { get }
 
-    /// requirements for playing this card
-    var requirements: [Requirement] { get }
-
     /// side effects on playing this card
     var effects: [Effect] { get }
 
+    /// requirements for playing this card
+    var requirements: [Requirement] { get }
+
     /// cost on playing this card
-    var cost: String? { get }
+//    var cost: Any? { get }
 
     /// required target to play this card
-    var target: String? { get }
+//    var target: Any? { get }
 }
 
 /// Function  defining constraints to play a card
@@ -100,5 +101,5 @@ public protocol Requirement {
 public protocol Effect: Event {
 
     /// All effect attributes
-//    var attr: [Attribute] { get }
+//    var attr: [String: Attribute] { get }
 }

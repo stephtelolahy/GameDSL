@@ -1,27 +1,49 @@
 import Foundation
 
+public struct GameImpl: Game {
+    public let attr: [String: Attribute]
+    public let players: [Player]
+    public var event: Result<Event, Error>?
+
+    public init(
+        @PlayerBuilder players: () -> [Player],
+        @AttributeBuilder attr: () -> [Attribute]
+    ) {
+        self.players = players()
+        self.attr = attr().toDictionary()
+    }
+}
+
+public struct PlayerImpl: Player {
+    public let id: String
+    public let attr: [String: Attribute]
+
+    public init(_ id: String, @AttributeBuilder _ attr: () -> [Attribute] = { [] }) {
+        self.id = id
+        self.attr = attr().toDictionary()
+    }
+}
+
 public struct CardImpl: Card {
     public let id: String
-    public let attributes: [Attribute]
+    public let attr: [String: Attribute]
     public let actions: [CardAction]
 
     public init(
         _ id: String,
-        @AttributeBuilder attributes: () -> [Attribute] = { [] },
+        @AttributeBuilder attr: () -> [Attribute] = { [] },
         @CardActionBuilder actions: () -> [CardAction] = { [] }
     ) {
         self.id = id
-        self.attributes = attributes()
+        self.attr = attr().toDictionary()
         self.actions = actions()
     }
 }
 
 public struct CardActionImpl: CardAction {
     public let playable: Bool
-    public let requirements: [Requirement]
     public let effects: [Effect]
-    public var cost: String?
-    public var target: String?
+    public let requirements: [Requirement]
 
     public init(
         playable: Bool,
@@ -31,37 +53,14 @@ public struct CardActionImpl: CardAction {
         self.playable = playable
         self.effects = effects()
         self.requirements = requirements()
-        self.cost = nil
-        self.target = nil
     }
 }
 
+extension Array where Element == Attribute {
 
-public struct GameImpl: Game {
-    public let attr: [Attribute]
-    public let players: [Player]
-    public let locations: [CardLocationAttribute]
-    public var event: Result<Event, Error>?
-
-    public init(
-        @PlayerBuilder players: () -> [Player],
-        @AttributeBuilder attr: () -> [Attribute]
-    ) {
-        self.players = players()
-        self.attr = attr()
-        self.locations = []
+    func toDictionary() -> [String: Attribute] {
+        reduce(into: [String: Attribute]()) {
+            $0[$1.id] = $1
+        }
     }
 }
-
-public struct PlayerImpl: Player {
-    public let id: String
-    public let attr: [Attribute]
-    public let locations: [CardLocationAttribute]
-
-    public init(_ id: String, @AttributeBuilder _ attr: () -> [Attribute] = { [] }) {
-        self.id = id
-        self.attr = attr()
-        self.locations = []
-    }
-}
-
