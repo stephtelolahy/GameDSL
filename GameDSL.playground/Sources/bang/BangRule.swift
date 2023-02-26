@@ -26,7 +26,7 @@ public struct BangRule: CardGameEngineRule {
 
     public func active(_ ctx: Game) -> [Event]? {
         /// return matched card options with context
-        guard let playerObj = ctx.activePlayer() else {
+        guard let playerObj = ctx.turnPlayer else {
             return nil
         }
 
@@ -56,26 +56,6 @@ extension CardAction {
 
 extension Array where Element == Requirement {
     func match(_ ctx: Game) -> Result<Void, Error> {
-        fatalError()
-    }
-}
-
-extension Player {
-    var hand: [Card] {
-        fatalError()
-    }
-
-    var inPlay: [Card] {
-        fatalError()
-    }
-
-    var abilities: [Card] {
-        fatalError()
-    }
-}
-
-extension Game {
-    func activePlayer() -> Player? {
         fatalError()
     }
 }

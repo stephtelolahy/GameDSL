@@ -12,8 +12,7 @@ public struct Repeat: Effect {
     }
 
     public init(_ times: Int, @EffectBuilder content: () -> Effect) {
-        self.times = NumExact(times)
-        self.content = content()
+        self.init(NumExact(times), content: content)
     }
 
     public func resolve(_ ctx: Game) -> Result<EventOutput, Error> {
