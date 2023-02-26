@@ -1,6 +1,6 @@
 import Foundation
 
-public struct EngineRuleImpl: EngineRule {
+public struct BangRule: CardGameEngineRule {
 
     public init() {}
 

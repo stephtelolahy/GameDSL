@@ -1,16 +1,22 @@
 import Foundation
 import Combine
 
-public class EngineImpl: Engine {
+/// Generating events for engine's loop
+public protocol CardGameEngineRule {
+    func triggered(_ ctx: Game) -> [Event]?
+    func active(_ ctx: Game) -> [Event]?
+}
+
+public class CardGameEngine: Engine {
     public var state: CurrentValueSubject<Game, Never>
     public var queue: [Event]
     private let delay: DispatchTimeInterval
-    private let rule: EngineRule
+    private let rule: CardGameEngineRule
 
     public init(
         _ ctx: Game,
         queue: [Event] = [],
-        rule: EngineRule,
+        rule: CardGameEngineRule,
         delay: DispatchTimeInterval = .seconds(0)
     ) {
         self.state = CurrentValueSubject(ctx)

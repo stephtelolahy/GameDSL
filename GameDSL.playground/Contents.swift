@@ -2,7 +2,7 @@ import Foundation
 
 // MARK: - Abilities
 
-let endTurn = CardImpl("endTurn") {
+let endTurn = Card("endTurn") {
     Group {
         Repeat(NumExcessHand()) {
             Discard(card: CardSelectHand())
@@ -12,7 +12,7 @@ let endTurn = CardImpl("endTurn") {
     .active()
 }
 
-let draw2CardsOnSetTurn = CardImpl("draw2CardsOnSetTurn") {
+let draw2CardsOnSetTurn = Card("draw2CardsOnSetTurn") {
     Repeat(2) {
         Draw()
     }
@@ -21,14 +21,14 @@ let draw2CardsOnSetTurn = CardImpl("draw2CardsOnSetTurn") {
     }
 }
 
-let eliminateOnLooseLastHealth = CardImpl("eliminateOnLooseLastHealth") {
+let eliminateOnLooseLastHealth = Card("eliminateOnLooseLastHealth") {
     Eliminate()
         .triggered {
             OnLooseLastHealth()
         }
 }
 
-let setGameOverOnEliminated = CardImpl("setGameOverOnEliminated") {
+let setGameOverOnEliminated = Card("setGameOverOnEliminated") {
     SetGameOver()
         .triggered {
             OnEliminated()
@@ -38,7 +38,7 @@ let setGameOverOnEliminated = CardImpl("setGameOverOnEliminated") {
 
 // MARK: - Collectible
 
-let beer = CardImpl("beer") {
+let beer = Card("beer") {
     Play {
         Heal(1)
     }
@@ -47,14 +47,14 @@ let beer = CardImpl("beer") {
     }
 }
 
-let duel = CardImpl("duel") {
+let duel = Card("duel") {
     Play(target: PlayerSelectAny()) {
         Damage(1)
     }
     .active()
 }
 
-let stagecoach = CardImpl("stagecoach") {
+let stagecoach = Card("stagecoach") {
     Play {
         Draw()
         Draw()
@@ -62,17 +62,17 @@ let stagecoach = CardImpl("stagecoach") {
     .active()
 }
 
-let mustang = CardImpl("mustang") {
+let mustang = Card("mustang") {
     Equip()
         .active()
 }
 
-let jail = CardImpl("jail") {
+let jail = Card("jail") {
     Handicap(target: PlayerSelectAny())
         .active()
 }
 
-let dynamite = CardImpl("dynamite") {
+let dynamite = Card("dynamite") {
     Equip()
         .active()
     
@@ -86,11 +86,11 @@ let dynamite = CardImpl("dynamite") {
     }
 }
 
-let ctx = GameImpl {
+let ctx = Game {
     Players {
         "suzzyLafayette"
         "vultureSam"
-        PlayerImpl("elGringo") {
+        Player("elGringo") {
             Health(2)
             Abilities {
                 endTurn
@@ -110,12 +110,11 @@ let ctx = GameImpl {
         stagecoach
         dynamite
         duel
-        CardImpl("secret").attr { Value("J♣️") }
+        Card("secret").attr { Value("J♣️") }
     }
 }
 
-let engine = EngineImpl(ctx, rule: EngineRuleImpl())
-//engine.update()
+let engine = CardGameEngine(ctx, rule: BangRule())
 
 print(ctx)
 
