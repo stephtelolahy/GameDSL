@@ -125,18 +125,3 @@ public class EngineImpl: Engine {
         }
     }
 }
-
-public struct EngineRuleImpl: EngineRule {
-
-    public init() {}
-
-    public func triggered(_ ctx: Game) -> [Event]? {
-        /// return matched card options with context
-        fatalError()
-    }
-
-    public func active(_ ctx: Game) -> [Event]? {
-        /// return matched card options with context
-        fatalError()
-    }
-}
