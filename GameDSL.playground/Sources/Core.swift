@@ -17,6 +17,12 @@ public protocol Engine {
     func update()
 }
 
+/// Generating events for engine's loop
+public protocol EngineRule {
+    func triggered(_ ctx: Game) -> [Event]?
+    func active(_ ctx: Game) -> [Event]?
+}
+
 /// Function that causes any change in the game state
 public protocol Event {
     func resolve(_ ctx: Game) -> Result<EventOutput, Error>
@@ -39,11 +45,14 @@ public protocol Game {
     /// all players
     var players: [Player] { get }
 
+    /// is Game over
+    var isOver: Bool { get }
+
     /// All attributes
     var attr: [String: Attribute] { get }
 
     /// last occurred event
-    var event: Result<Event, Error>? { get }
+    var event: Result<Event, Error>? { get set }
 }
 
 /// Any card, player, game attribute

@@ -1,15 +1,15 @@
 import Foundation
 
 public struct GameImpl: Game {
+    public let players: [Player]
+    public var isOver: Bool = false
     public let attr: [String: Attribute]
     public var event: Result<Event, Error>?
 
-    public var players: [Player] {
-        fatalError()
-    }
-
     public init(@AttributeBuilder attr: () -> [Attribute]) {
         self.attr = attr().toDictionary()
+        // TODO: get players from attributes
+        self.players = []
     }
 }
 

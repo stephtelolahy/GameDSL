@@ -114,6 +114,9 @@ let ctx = GameImpl {
     }
 }
 
+let engine = EngineImpl(ctx, rule: EngineRuleImpl())
+//engine.update()
+
 print(ctx)
 
 
