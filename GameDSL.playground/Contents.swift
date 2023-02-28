@@ -72,6 +72,15 @@ let wellsFargo = Card("wellsFargo") {
     .active()
 }
 
+let generalStore = Card("generalStore") {
+    Play {
+        Repeat(NumPlayers()) {
+            Store()
+        }
+    }
+    .active()
+}
+
 let duel = Card("duel") {
     Play(target: PlayerSelectAny()) {
         Damage(1)
@@ -126,6 +135,7 @@ let ctx = Game {
         beer.attr { Value("6♥️") }
         saloon
         stagecoach
+        generalStore
         dynamite
         duel
         Card("secret").attr { Value("J♣️") }
