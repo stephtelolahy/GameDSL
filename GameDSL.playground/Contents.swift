@@ -47,17 +47,34 @@ let beer = Card("beer") {
     }
 }
 
-let duel = Card("duel") {
-    Play(target: PlayerSelectAny()) {
-        Damage(1)
+let saloon = Card("saloon") {
+    Play {
+        Heal(1, player: PlayerDamaged())
     }
     .active()
 }
 
 let stagecoach = Card("stagecoach") {
     Play {
-        Draw()
-        Draw()
+        Repeat(2) {
+            Draw()
+        }
+    }
+    .active()
+}
+
+let wellsFargo = Card("wellsFargo") {
+    Play {
+        Repeat(3) {
+            Draw()
+        }
+    }
+    .active()
+}
+
+let duel = Card("duel") {
+    Play(target: PlayerSelectAny()) {
+        Damage(1)
     }
     .active()
 }
@@ -107,6 +124,7 @@ let ctx = Game {
     Turn("elGringo")
     Deck {
         beer.attr { Value("6♥️") }
+        saloon
         stagecoach
         dynamite
         duel
@@ -123,22 +141,6 @@ print(ctx)
  enum CardList {
 
      static let collectibles: [CardImpl] = [
-         .init(name: .beer,
-               playMode: PlayAction(),
-               canPlay: [IsPlayersAtLeast(3)],
-               onPlay: [Heal(value: 1)]),
-         .init(name: .saloon,
-               playMode: PlayAction(),
-               onPlay: [Heal(player: PlayerDamaged(),
-                             value: 1)]),
-         .init(name: .stagecoach,
-               playMode: PlayAction(),
-               onPlay: [Repeat(times: NumExact(2),
-                               effect: DrawDeck())]),
-         .init(name: .wellsFargo,
-               playMode: PlayAction(),
-               onPlay: [Repeat(times: NumExact(3),
-                               effect: DrawDeck())]),
          .init(name: .generalStore,
                playMode: PlayAction(),
                onPlay: [Repeat(times: NumPlayers(),
